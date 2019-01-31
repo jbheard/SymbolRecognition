@@ -72,10 +72,7 @@ def read_features(fname):
 
 if __name__ == '__main__':
 	# Match each image file to the corresponding ASCII symbol
-	files = [('9', '9.png'), ('8', '8.png'), ('7', '7.png'), 
-		('6', '6.png'), ('5', '5.png'), ('4', '4.png'), 
-		('3', '3.png'), ('2', '2.png'), ('1', '1.png'), 
-		('0', '0.png')]
+	files = [ (str(i), 'res/{}.png'.format(i)) for i in range(10) ]
 
 	all_feat = []
 	for val, fname in files:
