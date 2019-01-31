@@ -3,7 +3,7 @@ from matplotlib import pyplot
 from math import exp, ceil
 from symbols import scale_symbol, get_all_contours
 
-FEAT_SIZE = 9 # Number of terms in feature
+FEAT_SIZE = 12 # Number of terms in feature
 
 # Get value in range [0,1] for feature extraction
 def quantify(arr):
@@ -32,14 +32,9 @@ def extract_feature(img):
 	feature = [0] * FEAT_SIZE
 	k = 0
 	for i in range(0, fs, bs):
-		if k == FEAT_SIZE: break
 		for j in range(0, fs, bs):
 			if k == FEAT_SIZE: break
-			
-			tx, ty = bs, bs
-			if fs - i + bs >= bs: tx += fs - i
-			if j + bs >= fs: ty += fs - j
-			a = thresh[i:i+tx, j:j+ty]
+			a = thresh[i:i+bs, j:j+bs]
 
 			# Store as ratio of black:white
 			feature[k] = quantify(a.flat)
@@ -95,7 +90,7 @@ if __name__ == '__main__':
 		features = []
 		for contour in contours:
 			# Get the symbol from the image
-			symbol = scale_symbol(img, contour, (FEAT_SIZE+1,FEAT_SIZE+1))
+			symbol = scale_symbol(img, contour, (FEAT_SIZE, FEAT_SIZE))
 			# Get the feature vector and add it to the list
 			feat = extract_feature(symbol)
 			features.append( feat )

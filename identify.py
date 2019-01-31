@@ -39,6 +39,7 @@ def draw_boxes(img, contours, line=2, color=(0,0,255)):
 	return
 
 if __name__ == '__main__':
+	from features import FEAT_SIZE
 	# Read the image
 	img = cv2.imread(input("Enter filename: "))
 	if img is None:
@@ -53,7 +54,7 @@ if __name__ == '__main__':
 	# Loop through all contours
 	for contour in contours:
 		# Get the symbol and attempt to match it to a known feature
-		symbol = scale_symbol(img, contour, (9,9))
+		symbol = scale_symbol(img, contour, (FEAT_SIZE,FEAT_SIZE))
 		ret = recognize_symbol(features, symbol)
 		
 		# Output the results
