@@ -18,7 +18,8 @@ To run the code in this project you must have the following packages:
 
 Test cases are built into the modules, to run the tests you can do:
 
-```python3 features.py
+```
+python3 features.py
 python3 identify.py
 ```
 
