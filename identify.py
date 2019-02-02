@@ -6,9 +6,9 @@ from matplotlib import pyplot
 # Recognize a symbol from a list of features
 # This could match multiple symbols, it will take the 
 # best match out of all symbols tested
-def recognize_symbol(features, img):
+def recognize_symbol(features, img, fsize):
 	# Get the feature
-	feat = extract_feature(img)
+	feat = extract_feature(img, fsize)
 	retval = None
 	min = 1
 	# For every feature
@@ -39,14 +39,20 @@ def draw_boxes(img, contours, line=2, color=(0,0,255)):
 	return
 
 if __name__ == '__main__':
-	from features import FEAT_SIZE
+	from sys import argv
+
+	# argv check / usage info	
+	if len(argv) < 2:
+		print("Usage: {} image_path".format(argv[0]))
+		exit(1)
+
 	# Read the image
-	img = cv2.imread(input("Enter filename: "))
+	img = cv2.imread(argv[1])
 	if img is None:
 		print("Error loading image")
 		exit(1)
 	# Get the features from the file
-	features = read_features('numbers.feat')
+	fsize, features = read_features('numbers.feat')
 	
 	# Get all contours from the image
 	contours = get_all_contours(img)
@@ -54,8 +60,8 @@ if __name__ == '__main__':
 	# Loop through all contours
 	for contour in contours:
 		# Get the symbol and attempt to match it to a known feature
-		symbol = scale_symbol(img, contour, (FEAT_SIZE,FEAT_SIZE))
-		ret = recognize_symbol(features, symbol)
+		symbol = scale_symbol(img, contour, (fsize,fsize))
+		ret = recognize_symbol(features, symbol, fsize)
 		
 		# Output the results
 		if ret is not None:

@@ -48,8 +48,15 @@ def get_all_contours(img):
 
 # Main program to test
 if __name__ == '__main__':
+	from sys import argv
+
+	# argv check / usage info
+	if len(argv) < 2:
+		print("Usage: {} image_path".format(argv[0]))
+		exit(1)
+
 	# Read the image
-	img = cv2.imread(input("Enter filename: "))
+	img = cv2.imread(argv[1])
 	if img is None:
 		print("Error loading image")
 		exit(1)
