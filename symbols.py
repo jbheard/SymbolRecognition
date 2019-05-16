@@ -43,7 +43,7 @@ def get_all_contours(img):
 	thresh = cv2.morphologyEx(th2, cv2.MORPH_CLOSE, kernel)
 
 	# Only find external contours, characters (probably) won't be nested
-	_, contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+	contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 	return contours
 
 # Main program to test

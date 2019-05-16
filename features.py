@@ -3,8 +3,6 @@ from matplotlib import pyplot
 from math import exp, ceil
 from symbols import scale_symbol, get_all_contours
 
-FEAT_SIZE = 16 # Number of terms in feature
-
 # Get value in range [0,1] for feature extraction
 def quantify(arr):
 	b = 0
@@ -42,10 +40,10 @@ def extract_feature(img, fsize):
 	return tuple(feature) # Return immutable feature
 
 # Get the average of multiple feature vectors
-def feature_avg(features):
-	feat = [0]*FEAT_SIZE
+def feature_avg(features, fsize):
+	feat = [0]*fsize
 	# For each feature vector
-	for i in range(FEAT_SIZE):
+	for i in range(fsize):
 		for f in features:
 			feat[i] += f[i]
 		# Get average of features
@@ -104,7 +102,7 @@ if __name__ == '__main__':
 
 		# Take the average of multiple features for each image
 		# If the image only has 1 symbol, it will only use that
-		all_feat.append( (val, feature_avg(features)) )
+		all_feat.append( (val, feature_avg(features, FEAT_SIZE)) )
 
 	# Write the features to a file
 	write_features(all_feat, FEAT_SIZE, "numbers.feat")
