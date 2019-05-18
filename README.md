@@ -19,9 +19,12 @@ To run the code in this project you must have the following packages:
 Test cases are built into the modules, to run the tests you can do:
 
 ```
+python3 symbols.py
 python3 features.py
 python3 identify.py
 ```
+
+*symbols.py* will find all contours in the image and resize them inside a red box.
 
 *features.py* will generate feature vectors for the 10 images corresponding to each digit 0..9 and store them in numbers.feat
 
